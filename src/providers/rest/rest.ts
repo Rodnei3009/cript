@@ -7,7 +7,7 @@ export class RestProvider {
 
   //apiUrl = 'https://jsonplaceholder.typicode.com/users';
   apiUrlPart1 = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
-  apiUrlPart2 = '.SA&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
+  apiUrlPart2 = '&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');

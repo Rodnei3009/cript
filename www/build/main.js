@@ -55,33 +55,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, restProvider) {
+    function HomePage(navCtrl, restProvider, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.restProvider = restProvider;
-        this.arrayTime = [];
-        this.getUsers("GOLL4");
+        this.loadingCtrl = loadingCtrl;
+        this.arraySymbolRetorno = [];
+        this.arraySymbol = [
+            { title: 'GOLL4' },
+            { title: 'PETR4' },
+            { title: 'RAIL3' },
+            { title: 'BBAS3' },
+            { title: 'SAPR11' },
+            { title: 'ABEV3' },
+            { title: 'BRFS3' },
+            { title: 'CVCB3' },
+            { title: 'ITSA4' },
+            { title: 'EZTC3' },
+            { title: 'VULC3' }
+        ];
+        var i = 0;
+        this.loading();
+        for (i = 0; i < this.arraySymbol.length; i++) {
+            this.getUsers(this.arraySymbol[i].title);
+            //alert(this.arraySymbol[i].title);
+        }
     }
+    HomePage.prototype.loading = function () {
+        var load = this.loadingCtrl.create({
+            //content:'Please Wait....',
+            duration: 3000
+        });
+        load.present();
+    };
     HomePage.prototype.getUsers = function (sigla) {
         var _this = this;
         this.restProvider.getUsers(sigla)
             .then(function (data) {
             _this.users = data;
             _this.papel = data["Meta Data"]["2. Symbol"];
-            _this.preco = data["Time Series (15min)"]["2018-04-27 15:45:00"]["4. close"];
-            //this.arrayTime = data["Time Series (15min)"];
-            //alert(data["Time Series (15min)"]);
-            //alert(data["Meta Data"]["2. Symbol"]);
-            //alert(data["Time Series (15min)"]["2018-04-27 15:45:00"]["4. close"]);
-            console.log(_this.users);
+            var timeSeries = data["Time Series (15min)"];
+            var timeSeriesKeys = (Object.keys(timeSeries)).sort();
+            console.log(timeSeriesKeys);
+            _this.preco = timeSeries[timeSeriesKeys[timeSeriesKeys.length - 1]]["4. close"];
+            _this.atualizacao = timeSeriesKeys[timeSeriesKeys.length - 1];
+            _this.arraySymbolRetorno.push({ papel: _this.papel, valor: _this.preco, atualizacao: _this.atualizacao });
         });
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list inset>\n    <ion-item>\n      <h2>{{papel}}</h2>\n      <p>{{preco}}</p>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n \n  <ion-list inset>\n    <ion-item *ngFor="let symbol of arraySymbolRetorno">\n      <h2>{{symbol.papel}}</h2>\n      <p>{{symbol.atualizacao}}</p>\n      <p>{{symbol.valor}}</p>\n    </ion-item>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -111,7 +138,7 @@ var RestProvider = /** @class */ (function () {
         this.http = http;
         //apiUrl = 'https://jsonplaceholder.typicode.com/users';
         this.apiUrlPart1 = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
-        this.apiUrlPart2 = '.SA&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
+        this.apiUrlPart2 = '&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
         console.log('Hello RestProvider Provider');
     }
     RestProvider.prototype.getUsers = function (sigla) {
@@ -126,9 +153,10 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
     ], RestProvider);
     return RestProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=rest.js.map
@@ -182,7 +210,7 @@ var ListPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-list',template:/*ion-inline-start:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\list\list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-end>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\pages\list\list.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], ListPage);
     return ListPage;
     var ListPage_1;
@@ -329,13 +357,13 @@ var MyApp = /** @class */ (function () {
         this.nav.setRoot(page.component);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* Nav */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\r.brassoroto\Documents\GitHub\cript\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());

@@ -8,10 +8,13 @@
 </ion-header>
 
 <ion-content>
+ 
   <ion-list inset>
-    <ion-item>
-      <h2>{{papel}}</h2>
-      <p>{{preco}}</p>
+    <ion-item *ngFor="let symbol of arraySymbolRetorno">
+      <h2>{{symbol.papel}}</h2>
+      <p>{{symbol.atualizacao}}</p>
+      <p>{{symbol.valor}}</p>
     </ion-item>
   </ion-list>
+
 </ion-content>
