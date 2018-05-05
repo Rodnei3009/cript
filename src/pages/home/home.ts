@@ -14,7 +14,11 @@ export class HomePage {
   preco: any;
   atualizacao: string;
   arraySymbolRetorno = [];
-  
+  cont: number = 0;
+  total: number = 0;
+  percentStr: string = ""; 
+  percentNum: number = 0;
+
   arraySymbol = [
     {title: 'GOLL4'},
     {title: 'PETR4'},
@@ -30,8 +34,11 @@ export class HomePage {
   ];
 
   constructor(public navCtrl: NavController, public restProvider: RestProvider, public loadingCtrl: LoadingController) {
+    
+    this.total = this.arraySymbol.length;
+
     let i=0;
-    this.loading();
+    //this.loading();
     for(i=0; i<this.arraySymbol.length; i++) {
       this.getUsers(this.arraySymbol[i].title);
       //alert(this.arraySymbol[i].title);
@@ -62,6 +69,9 @@ export class HomePage {
       this.atualizacao = timeSeriesKeys[timeSeriesKeys.length-1];
 
       this.arraySymbolRetorno.push({papel: this.papel, valor: this.preco, atualizacao: this.atualizacao });      
+      this.cont = this.cont + 1;
+      this.percentNum = this.cont / this.total * 100;
+      this.percentStr = this.percentNum.toFixed(0).toString() + "%";
 
     });
   }

@@ -9,6 +9,22 @@
 
 <ion-content>
  
+  <h6>{{percentStr}}</h6>
+
+  <progress max={{total}} value={{cont}}></progress>
+
+
+  <ion-card *ngFor="let symbol of arraySymbolRetorno">
+    <ion-card-header>
+      <h2>{{symbol.papel}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{symbol.atualizacao}}</p>
+      <p>{{symbol.valor}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!--
   <ion-list inset>
     <ion-item *ngFor="let symbol of arraySymbolRetorno">
       <h2>{{symbol.papel}}</h2>
@@ -16,5 +32,6 @@
       <p>{{symbol.valor}}</p>
     </ion-item>
   </ion-list>
+  -->
 
 </ion-content>
