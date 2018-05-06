@@ -40,7 +40,9 @@ var BitcoinPage = /** @class */ (function () {
         var _this = this;
         this.BTC.getBitcoin()
             .then(function (data) {
+            alert('getBitcoin4');
             alert(data["ticker_1h"]["exchanges"]["FOX"]["open"]);
+            alert(data["ticker_1h"].exchanges.FOX.last);
             _this.btcFOXlast = data["ticker_1h"]["exchanges"]["FOX"]["last"];
             _this.btcFOXopen = data["ticker_1h"]["exchanges"]["FOX"]["open"];
             _this.btcFOXvar = (_this.btcFOXlast - _this.btcFOXopen).toFixed(2);
