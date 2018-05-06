@@ -9,8 +9,22 @@ export class RestProvider {
   apiUrlPart1 = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
   apiUrlPart2 = '&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
 
+  apiBitcoin = 'https://api.bitvalor.com/v1/ticker.json';
+
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
+  }
+
+  
+  getBitcoin() {
+    return new Promise(resolve => {
+      this.http.get(this.apiBitcoin).subscribe(data => {
+        alert("ccc");
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
   }
 
   getUsers(sigla) {
