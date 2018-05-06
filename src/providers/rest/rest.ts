@@ -27,7 +27,7 @@ export class RestProvider {
         alert('getBitcoin3');
         resolve(data);
       }, err => {
-        alert(err);
+        alert('getBitcoin3: ' + err);
         console.log(err);
       });
     });

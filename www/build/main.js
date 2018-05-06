@@ -473,7 +473,7 @@ var RestProvider = /** @class */ (function () {
                 alert('getBitcoin3');
                 resolve(data);
             }, function (err) {
-                alert(err);
+                alert('getBitcoin3: ' + err);
                 console.log(err);
             });
         });
