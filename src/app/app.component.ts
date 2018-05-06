@@ -23,7 +23,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Cotações Bolsa', component: HomePage },
-      { title: 'Bitcoin', component: ListPage },
       { title: 'Bitcoin', component: BitcoinPage }
     ];
 

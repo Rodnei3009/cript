@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 
 @Injectable()
 export class RestProvider {
@@ -15,11 +14,15 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
-  
   getBitcoin() {
+  
+    //let head = new HttpHeaders();
+    //head = head.append('Access-Control-Allow-Origin', '*');
+    //head = head.set('Access-Control-Allow-Origin', '*');
+
+    
     return new Promise(resolve => {
       this.http.get(this.apiBitcoin).subscribe(data => {
-        alert("ccc");
         resolve(data);
       }, err => {
         console.log(err);
