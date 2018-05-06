@@ -466,10 +466,14 @@ var RestProvider = /** @class */ (function () {
         //head = head.append('Access-Control-Allow-Origin', '*');
         //head = head.set('Access-Control-Allow-Origin', '*');
         var _this = this;
+        alert('getBitcoin');
         return new Promise(function (resolve) {
+            alert('getBitcoin2');
             _this.http.get(_this.apiBitcoin).subscribe(function (data) {
+                alert('getBitcoin3');
                 resolve(data);
             }, function (err) {
+                alert(err);
                 console.log(err);
             });
         });
@@ -486,9 +490,10 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
     ], RestProvider);
     return RestProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=rest.js.map
