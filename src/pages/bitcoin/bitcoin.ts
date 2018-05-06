@@ -36,18 +36,21 @@ export class BitcoinPage {
     this.BTC.getBitcoin()
     .then(data => {
 
+      alert(data["ticker_1h"]["exchanges"]["FOX"]["open"]);
       this.btcFOXlast = data["ticker_1h"]["exchanges"]["FOX"]["last"];
       this.btcFOXopen = data["ticker_1h"]["exchanges"]["FOX"]["open"];
       this.btcFOXvar = (this.btcFOXlast - this.btcFOXopen).toFixed(2);
       this.btcFOXvarPercent = ((this.btcFOXlast/this.btcFOXopen)-1)*100;
       this.btcFOXvarPercStr = this.btcFOXvarPercent.toFixed(2) + "%"; 
 
+      alert(data["ticker_12h"]["exchanges"]["FOX"]["open"]);
       this.btcFOXlast_12h = data["ticker_12h"]["exchanges"]["FOX"]["last"];
       this.btcFOXopen_12h = data["ticker_12h"]["exchanges"]["FOX"]["open"];
       this.btcFOXvar_12h = (this.btcFOXlast_12h - this.btcFOXopen_12h).toFixed(2);
       this.btcFOXvarPercent_12h = ((this.btcFOXlast_12h/this.btcFOXopen_12h)-1)*100;
       this.btcFOXvarPercStr_12h = this.btcFOXvarPercent_12h.toFixed(2) + "%";
       
+      alert(data["ticker_24h"]["exchanges"]["FOX"]["open"]);
       this.btcFOXlast_24h = data["ticker_24h"]["exchanges"]["FOX"]["last"];
       this.btcFOXopen_24h = data["ticker_24h"]["exchanges"]["FOX"]["open"];
       this.btcFOXvar_24h = (this.btcFOXlast_24h - this.btcFOXopen_24h).toFixed(2);
