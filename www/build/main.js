@@ -458,12 +458,12 @@ var RestProvider = /** @class */ (function () {
         console.log('Hello RestProvider Provider');
     }
     RestProvider.prototype.getBitcoin = function () {
-        //let head = new HttpHeaders();
-        //head = head.append('Access-Control-Allow-Origin', '*');
-        //head = head.set('Access-Control-Allow-Origin', '*');
         var _this = this;
+        var head = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]();
+        head = head.append('Access-Control-Allow-Origin', '*');
+        head = head.set('Access-Control-Allow-Origin', '*');
         return new Promise(function (resolve) {
-            _this.http.get(_this.apiBitcoin).subscribe(function (data) {
+            _this.http.get(_this.apiBitcoin, { headers: head }).subscribe(function (data) {
                 resolve(data);
             }, function (err) {
                 alert('erro: ' + err);
