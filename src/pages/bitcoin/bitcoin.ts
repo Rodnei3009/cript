@@ -35,6 +35,7 @@ export class BitcoinPage {
   getBTC() {
     this.BTC.getBitcoin()
     .then(data => {
+      
       this.btcFOXlast = data["ticker_1h"]["exchanges"]["FOX"]["last"];
       this.btcFOXopen = data["ticker_1h"]["exchanges"]["FOX"]["open"];
       this.btcFOXvar = (this.btcFOXlast - this.btcFOXopen).toFixed(2);
