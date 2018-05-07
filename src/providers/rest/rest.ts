@@ -20,12 +20,12 @@ export class RestProvider {
     //head = head.append('Access-Control-Allow-Origin', '*');
     //head = head.set('Access-Control-Allow-Origin', '*');
 
-    
+
     return new Promise(resolve => {
       this.http.get(this.apiBitcoin).subscribe(data => {
         resolve(data);
       }, err => {
-        alert(err);
+        alert('erro: ' + err);
         console.log(err);
       });
     });
