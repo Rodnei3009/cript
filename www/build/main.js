@@ -40,21 +40,16 @@ var BitcoinPage = /** @class */ (function () {
         var _this = this;
         this.BTC.getBitcoin()
             .then(function (data) {
-            alert('getBitcoin4');
-            alert(data["ticker_1h"]["exchanges"]["FOX"]["open"]);
-            alert(data["ticker_1h"].exchanges.FOX.last);
             _this.btcFOXlast = data["ticker_1h"]["exchanges"]["FOX"]["last"];
             _this.btcFOXopen = data["ticker_1h"]["exchanges"]["FOX"]["open"];
             _this.btcFOXvar = (_this.btcFOXlast - _this.btcFOXopen).toFixed(2);
             _this.btcFOXvarPercent = ((_this.btcFOXlast / _this.btcFOXopen) - 1) * 100;
             _this.btcFOXvarPercStr = _this.btcFOXvarPercent.toFixed(2) + "%";
-            alert(data["ticker_12h"]["exchanges"]["FOX"]["open"]);
             _this.btcFOXlast_12h = data["ticker_12h"]["exchanges"]["FOX"]["last"];
             _this.btcFOXopen_12h = data["ticker_12h"]["exchanges"]["FOX"]["open"];
             _this.btcFOXvar_12h = (_this.btcFOXlast_12h - _this.btcFOXopen_12h).toFixed(2);
             _this.btcFOXvarPercent_12h = ((_this.btcFOXlast_12h / _this.btcFOXopen_12h) - 1) * 100;
             _this.btcFOXvarPercStr_12h = _this.btcFOXvarPercent_12h.toFixed(2) + "%";
-            alert(data["ticker_24h"]["exchanges"]["FOX"]["open"]);
             _this.btcFOXlast_24h = data["ticker_24h"]["exchanges"]["FOX"]["last"];
             _this.btcFOXopen_24h = data["ticker_24h"]["exchanges"]["FOX"]["open"];
             _this.btcFOXvar_24h = (_this.btcFOXlast_24h - _this.btcFOXopen_24h).toFixed(2);
@@ -468,14 +463,11 @@ var RestProvider = /** @class */ (function () {
         //head = head.append('Access-Control-Allow-Origin', '*');
         //head = head.set('Access-Control-Allow-Origin', '*');
         var _this = this;
-        alert('getBitcoin');
         return new Promise(function (resolve) {
-            alert('getBitcoin2');
             _this.http.get(_this.apiBitcoin).subscribe(function (data) {
-                alert('getBitcoin3');
                 resolve(data);
             }, function (err) {
-                alert('getBitcoin3: ' + err);
+                alert(err);
                 console.log(err);
             });
         });

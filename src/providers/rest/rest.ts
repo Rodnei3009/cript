@@ -20,14 +20,11 @@ export class RestProvider {
     //head = head.append('Access-Control-Allow-Origin', '*');
     //head = head.set('Access-Control-Allow-Origin', '*');
 
-    alert('getBitcoin');
     return new Promise(resolve => {
-      alert('getBitcoin2');
       this.http.get(this.apiBitcoin).subscribe(data => {
-        alert('getBitcoin3');
         resolve(data);
       }, err => {
-        alert('getBitcoin3: ' + err);
+        alert(err);
         console.log(err);
       });
     });
