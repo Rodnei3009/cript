@@ -454,21 +454,21 @@ var RestProvider = /** @class */ (function () {
         //apiUrl = 'https://jsonplaceholder.typicode.com/users';
         this.apiUrlPart1 = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
         this.apiUrlPart2 = '&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
-        this.apiBitcoin = 'https://api.bitvalor.com/v1/ticker.json';
+        this.apiBitcoin = 'http://api.bitvalor.com/v1/ticker.json';
         console.log('Hello RestProvider Provider');
     }
     RestProvider.prototype.getBitcoin = function () {
-        var _this = this;
         /* let head = new HttpHeaders();
          head = head.append('Access-Control-Allow-Origin', '*');
          head = head.append('access-control-allow-methods', 'GET');
          head = head.set('Access-Control-Allow-Origin', '*');
          head = head.set('Content-Type', 'text/plain');
      */
-        var head = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]();
-        head.set('Content-Type', 'text/plain');
+        /* let head = new HttpHeaders()
+        head.set('Content-Type', 'text/plain') */
+        var _this = this;
         return new Promise(function (resolve) {
-            _this.http.get(_this.apiBitcoin, { headers: head }).subscribe(function (data) {
+            _this.http.get(_this.apiBitcoin).subscribe(function (data) {
                 console.log(data);
                 resolve(data);
             }, function (err) { return console.log(err); });
@@ -486,9 +486,10 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
     ], RestProvider);
     return RestProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=rest.js.map

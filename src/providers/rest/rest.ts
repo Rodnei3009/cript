@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient /*, HttpHeaders */ } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class RestProvider {
   apiUrlPart1 = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
   apiUrlPart2 = '&interval=15min&outputsize=compact&apikey=SUBSTITUA_SUA_KEY_AQUI';
 
-  apiBitcoin = 'https://api.bitvalor.com/v1/ticker.json';
+  apiBitcoin = 'http://api.bitvalor.com/v1/ticker.json';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
@@ -22,13 +22,13 @@ export class RestProvider {
     head = head.set('Access-Control-Allow-Origin', '*');
     head = head.set('Content-Type', 'text/plain');
 */
-    let head = new HttpHeaders()
-    head.set('Content-Type', 'text/plain')
+    /* let head = new HttpHeaders()
+    head.set('Content-Type', 'text/plain') */
 
     return new Promise(resolve => {
-      this.http.get(this.apiBitcoin, { headers: head }).subscribe(data => {
+      this.http.get(this.apiBitcoin).subscribe(data => {
         console.log(data)
-        resolve(data);
+        resolve(data)
       }, err => console.log(err));
     });
   }

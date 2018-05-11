@@ -4,7 +4,7 @@
   "type": "ionic-angular",
   "proxies": [{
     "path": "v1/ticker.json",
-    "proxyUrl": "https://api.bitvalor.com/"
+    "proxyUrl": "http://api.bitvalor.com/"
   }],
   "integrations": {
     "cordova": {}
