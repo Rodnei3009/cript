@@ -15,19 +15,21 @@ export class RestProvider {
   }
 
   getBitcoin() {
-  
-    let head = new HttpHeaders();
+    
+   /* let head = new HttpHeaders();
     head = head.append('Access-Control-Allow-Origin', '*');
+    head = head.append('access-control-allow-methods', 'GET');
     head = head.set('Access-Control-Allow-Origin', '*');
-
+    head = head.set('Content-Type', 'text/plain');
+*/
+    let head = new HttpHeaders()
+    head.set('Content-Type', 'text/plain')
 
     return new Promise(resolve => {
-      this.http.get(this.apiBitcoin, {headers:head}).subscribe(data => {
+      this.http.get(this.apiBitcoin, { headers: head }).subscribe(data => {
+        console.log(data)
         resolve(data);
-      }, err => {
-        alert('erro: ' + err);
-        console.log(err);
-      });
+      }, err => console.log(err));
     });
   }
 

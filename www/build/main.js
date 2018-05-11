@@ -459,16 +459,19 @@ var RestProvider = /** @class */ (function () {
     }
     RestProvider.prototype.getBitcoin = function () {
         var _this = this;
+        /* let head = new HttpHeaders();
+         head = head.append('Access-Control-Allow-Origin', '*');
+         head = head.append('access-control-allow-methods', 'GET');
+         head = head.set('Access-Control-Allow-Origin', '*');
+         head = head.set('Content-Type', 'text/plain');
+     */
         var head = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]();
-        head = head.append('Access-Control-Allow-Origin', '*');
-        head = head.set('Access-Control-Allow-Origin', '*');
+        head.set('Content-Type', 'text/plain');
         return new Promise(function (resolve) {
             _this.http.get(_this.apiBitcoin, { headers: head }).subscribe(function (data) {
+                console.log(data);
                 resolve(data);
-            }, function (err) {
-                alert('erro: ' + err);
-                console.log(err);
-            });
+            }, function (err) { return console.log(err); });
         });
     };
     RestProvider.prototype.getUsers = function (sigla) {

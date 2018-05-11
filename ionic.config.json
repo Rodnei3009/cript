@@ -2,6 +2,10 @@
   "name": "cript",
   "app_id": "",
   "type": "ionic-angular",
+  "proxies": [{
+    "path": "v1/ticker.json",
+    "proxyUrl": "https://api.bitvalor.com/"
+  }],
   "integrations": {
     "cordova": {}
   }
